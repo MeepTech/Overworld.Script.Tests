@@ -45,20 +45,10 @@ namespace Overworld.Script.Tests {
       // Add the converter for tags to both settings:
       settings.ModelSerializerOptions = new Model.Serializer.Settings {
 
-        TryToSetUpDbContext = false,
-
-        ConfigureModelJsonSerializerSettings = (defaultResolver, converters) => {
+        ConfigureJsonSerializerSettings = (defaultResolver, converters) => {
           var defaultSettings = settings.ModelSerializerOptions
-            .ConfigureComponentJsonSerializerSettings(defaultResolver, converters);
-          defaultSettings.Converters.Add(new Entity.Animation.Tag.JsonConverter());
-
-          return defaultSettings;
-        },
-
-        ConfigureComponentJsonSerializerSettings = (defaultResolver, converters) => {
-          var defaultSettings = settings.ModelSerializerOptions
-            .ConfigureComponentJsonSerializerSettings(defaultResolver, converters);
-          defaultSettings.Converters.Add(new Entity.Animation.Tag.JsonConverter());
+            .ConfigureJsonSerializerSettings(defaultResolver, converters);
+          defaultSettings.Converters.Add(new Tag.JsonConverter());
 
           return defaultSettings;
         }
